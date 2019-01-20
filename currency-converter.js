@@ -14,3 +14,10 @@ const getCountries = async (currencyCode)=>{
     return response.data.map(country => country.name);
 };
 
+const convert = async (fromCurrency, toCurrency, amount)=>{
+    const exchangeRate = await getExhangeRate(fromCurrency,toCurrency);
+    const countries = await getCountries(toCurrency);
+    const convertedAmount = (amount * exchangeRate).toFixed(2);
+    
+    return `${amount} ${fromCurrency} is worth ${convertedAmount} ${toCurrency}. You can spend these in the following countries: ${countries}`;
+};
